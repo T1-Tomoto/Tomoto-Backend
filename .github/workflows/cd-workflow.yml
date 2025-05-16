@@ -49,21 +49,22 @@ jobs:
           envs: GITHUB_SHA
           script: |
             echo "✋🏻Stopping existing container"
-            sudo docker stop sssssssia/tomoto-repo
-            sudo docker rm sssssssia/tomoto-repo
+            sudo docker stop tomoto-server
+            sudo docker rm tomoto-server
         
             sudo docker ps -a
             
             echo "🥳 Pulling new image"
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
-            -p 8000:8080 \
-            --name tomoto-server \
-            -e MYSQL_URL=${{ secrets.MYSQL_URL }} \
-            -e MYSQL_USER=${{ secrets.MYSQL_USER }} \
-            -e MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} \
             
             echo "🌱 Running new container"
-            sudo docker run -d -p 8000:8080 --name sssssssia/tomoto-repo ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
+            sudo docker run -d \
+              -p 8000:8080 \
+              --name tomoto-server \
+              -e MYSQL_URL=${{ secrets.MYSQL_URL }} \
+              -e MYSQL_USER=${{ secrets.MYSQL_USER }} \
+              -e MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} \
+              ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
 
             echo "🚮 Cleaning up old images"
             sudo docker image prune -f
