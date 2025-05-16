@@ -68,5 +68,6 @@ jobs:
               -e SPRING_DATASOURCE_PASSWORD=${{ secrets.MYSQL_PASSWORD }} \
               ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
 
+
             echo "🚮 Cleaning up old images"
             sudo docker image prune -f
