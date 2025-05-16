@@ -19,7 +19,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: ☕️ set up JDK 21        # 프로젝트의 java 버전에 맞추어 설정
+
+      - name: ☕️ Set up JDK 21
         uses: actions/setup-java@v3
         with:
           java-version: '21'
@@ -27,19 +28,19 @@ jobs:
           server-id: github
           setting-path: ${{ github.workspace }}
 
-      - name: 👏🏻 grant execute permission for gradlew
+      - name: 👏🏻 Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: 🐘 build with Gradle (without test)
+      - name: 🐘 Build with Gradle (without test)
         run: ./gradlew clean build -x test --stacktrace
 
       - name: 🐳 Docker build & push
-        run:  |
+        run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker build -f Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }} .
           docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
 
-      - name: 🚀 deploy to server
+      - name: 🚀 Deploy to server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -49,14 +50,15 @@ jobs:
           envs: GITHUB_SHA
           script: |
             echo "✋🏻Stopping existing container"
-            sudo docker stop tomoto-server
-            sudo docker rm tomoto-server
-        
+            sudo docker stop tomoto-server || true
+            sudo docker rm tomoto-server || true
+
+            echo "📦 Checking all containers"
             sudo docker ps -a
-            
+
             echo "🥳 Pulling new image"
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
-            
+
             echo "🌱 Running new container"
             sudo docker run -d \
               -p 8000:8080 \
@@ -64,7 +66,7 @@ jobs:
               -e SPRING_DATASOURCE_URL=${{ secrets.MYSQL_URL }} \
               -e SPRING_DATASOURCE_USERNAME=${{ secrets.MYSQL_USER }} \
               -e SPRING_DATASOURCE_PASSWORD=${{ secrets.MYSQL_PASSWORD }} \
-              ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }} 
+              ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
 
             echo "🚮 Cleaning up old images"
             sudo docker image prune -f
