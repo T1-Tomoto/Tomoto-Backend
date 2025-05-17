@@ -54,6 +54,11 @@ jobs:
             
             echo "📦 Checking all containers"
             sudo docker ps -a
+
+            echo "🔍 SPRING_DATASOURCE_URL=${{ secrets.MYSQL_URL }}"
+            echo "🔍 SPRING_DATASOURCE_USERNAME=${{ secrets.MYSQL_USER }}"
+            echo "🔍 SPRING_DATASOURCE_PASSWORD=${{ secrets.MYSQL_PASSWORD }}"
+
             
             echo "🥳 Pulling new image"
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
