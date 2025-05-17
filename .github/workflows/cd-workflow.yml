@@ -57,6 +57,13 @@ jobs:
             
             echo "🥳 Pulling new image"
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
+
+            echo "🧪 Printing docker run command before execution"
+            echo "sudo docker run -d -p 8000:8080 --name tomoto-server \
+              -e SPRING_DATASOURCE_URL=${{ secrets.MYSQL_URL }} \
+              -e SPRING_DATASOURCE_USERNAME=${{ secrets.MYSQL_USER }} \
+              -e SPRING_DATASOURCE_PASSWORD=${{ secrets.MYSQL_PASSWORD }} \
+              ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}"
             
             echo "🌱 Running new container"
             sudo docker run -d -p 8000:8080 --name tomoto-server \
