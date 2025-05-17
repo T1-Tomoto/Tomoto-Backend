@@ -51,8 +51,8 @@ jobs:
             echo "✋🏻Stopping existing container"
             sudo docker stop tomoto-server
             sudo docker rm tomoto-server
-
-#            echo "📦 Checking all containers"
+            
+            echo "📦 Checking all containers"
             sudo docker ps -a
             
             echo "🥳 Pulling new image"
