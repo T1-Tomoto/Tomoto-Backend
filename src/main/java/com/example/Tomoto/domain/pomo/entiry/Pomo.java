@@ -28,4 +28,11 @@ public class Pomo {
     private LocalDateTime created_at;
 
     private int pomo_num; //오늘 하루동안 몇 번
+
+    public void registerUser(User user){
+        this.user = user;
+        if(!user.getPomos().contains(this)){
+            user.getPomos().add(this);
+        }
+    }
 }

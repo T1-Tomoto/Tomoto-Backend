@@ -21,4 +21,11 @@ public class Music {
     private User user;
 
     private String url;
+
+    public void registerUser(User user) {
+        this.user = user;
+        if(!user.getMusics().contains(this)) {
+            user.getMusics().add(this);
+        }
+    }
 }

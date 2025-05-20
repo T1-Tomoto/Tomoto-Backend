@@ -16,10 +16,17 @@ public class Friend {
     @Column(name = "friend_id")
     private Long id;
 
-    private String from_id;
-    private String to_id;
+//    private String from_id;
+//    private String to_id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    public void registerUser(User user) {
+        this.user = user;
+        if(!user.getFriends().contains(this)){
+            user.getFriends().add(this);
+        }
+    }
 }
