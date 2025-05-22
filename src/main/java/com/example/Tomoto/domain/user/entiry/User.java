@@ -37,7 +37,9 @@ public class User {
     @Column(nullable = false, length = 500)
     private LocalDateTime createdAt;
 
-    private int level;
+    @Builder.Default
+    private int level = 1;
+
     private int totalPomo;
 
     @OneToMany(mappedBy = "user")

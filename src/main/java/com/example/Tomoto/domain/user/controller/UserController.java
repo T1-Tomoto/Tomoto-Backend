@@ -2,9 +2,12 @@ package com.example.Tomoto.domain.user.controller;
 
 import com.example.Tomoto.domain.user.dto.request.UserLoginReq;
 import com.example.Tomoto.domain.user.dto.request.UserRegisterReq;
+import com.example.Tomoto.domain.user.dto.response.UserSettingsRes;
 import com.example.Tomoto.domain.user.dto.response.UserTokenRes;
 import com.example.Tomoto.domain.user.service.UserService;
+import com.example.Tomoto.global.annotation.Jwt;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +35,11 @@ public class UserController {
             @Validated @RequestBody UserLoginReq req
     ){
         return ResponseEntity.ok(userService.login(req));
+    }
+
+    @Operation(summary = "설정", description = "로그인한 유저의 정보를 보여주는 설정탭에 접근합니다.")
+    @GetMapping("/settings")
+    public ResponseEntity<UserSettingsRes> getUserSettings(@Parameter(hidden = true) @Jwt Long userId) {
+        return ResponseEntity.ok(userService.settings(userId));
     }
 }

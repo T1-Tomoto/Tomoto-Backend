@@ -29,7 +29,7 @@ public class JwtProvider {
         Date now = new Date();
         return Jwts.builder()
                 .claim("category", "access")
-                .claim("user_id", user.getUserId())
+                .claim("userId", user.getUserId())
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + ACCESS_TOKEN_EXPIRE_MILLIS))
                 .signWith(secretKey, SignatureAlgorithm.HS256)
@@ -70,8 +70,8 @@ public class JwtProvider {
                 .getBody();
     }
 
-    public Long getUsIdx(String token) {
-        return Long.parseLong(getClaims(token).get("idx").toString());
+    public Long getUserId(String token) {
+        return Long.parseLong(getClaims(token).get("userId").toString());
     }
 
 }

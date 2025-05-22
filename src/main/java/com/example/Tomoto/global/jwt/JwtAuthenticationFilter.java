@@ -29,6 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
+
         filterChain.doFilter(request, response);
     }
 
@@ -42,7 +43,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private Authentication getAuthentication(String token) {
-        Long usIdx = jwtProvider.getUsIdx(token);
+        Long usIdx = jwtProvider.getUserId(token);
+        System.out.println("Extracted userId from JWT: " + usIdx);
+
         return new JwtTokenAuthentication(usIdx);
     }
 }
