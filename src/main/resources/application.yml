@@ -2,6 +2,10 @@ spring:
   profiles:
     active: local # 기본 active profile 설정
 
+jwt:
+  secret: ${JWT_SECRET}
+  accessTokenExpiration: ${JWT_EXPIRATION} # 1일
+
 ---
 spring:
   config:
@@ -45,3 +49,4 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         show-sql: true
+

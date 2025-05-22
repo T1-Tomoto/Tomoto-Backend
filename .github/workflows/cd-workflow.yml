@@ -55,16 +55,12 @@ jobs:
             echo "📦 Checking all containers"
             sudo docker ps -a
 
-            echo "🔍 SPRING_DATASOURCE_URL=${{ secrets.MYSQL_URL }}"
-            echo "🔍 SPRING_DATASOURCE_USERNAME=${{ secrets.MYSQL_USER }}"
-            echo "🔍 SPRING_DATASOURCE_PASSWORD=${{ secrets.MYSQL_PASSWORD }}"
-
             
             echo "🥳 Pulling new image"
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }}
             
             echo "🌱 Running new container"
-            sudo docker run -d -p 8000:8080 --name tomoto-server -e "SPRING_DATASOURCE_URL=${{ secrets.MYSQL_URL }}" -e "SPRING_DATASOURCE_USERNAME=${{ secrets.MYSQL_USER }}" -e "SPRING_DATASOURCE_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }} 
+            sudo docker run -d -p 8000:8080 --name tomoto-server -e "SPRING_DATASOURCE_URL=${{ secrets.MYSQL_URL }}" -e "SPRING_DATASOURCE_USERNAME=${{ secrets.MYSQL_USER }}" -e "SPRING_DATASOURCE_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" -e "JWT_SECRET: ${{secrets.JWT_SECRET}}" -e "JWT_EXPIRATION: ${{secrets.JWT_EXPIRATION}}" ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE }} 
 
             echo "🚮 Cleaning up old images"
             sudo docker image prune -f
