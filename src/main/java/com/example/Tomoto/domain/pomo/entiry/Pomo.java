@@ -2,8 +2,7 @@ package com.example.Tomoto.domain.pomo.entiry;
 
 import com.example.Tomoto.domain.user.entiry.User;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -11,7 +10,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table
 @Getter
-@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Pomo {
 
     //하루에 한 개 생성: 하루의 정보만 들어감
@@ -25,7 +26,15 @@ public class Pomo {
     private User user;
 
     @CreationTimestamp
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
-    private int pomo_num; //오늘 하루동안 몇 번
+    @Setter
+    private int pomo_num = 1; //오늘 하루동안 몇 번
+
+    public static Pomo create(User user){
+        return Pomo.builder()
+                .user(user)
+                .createdAt(LocalDateTime.now())
+                .build();
+    }
 }
