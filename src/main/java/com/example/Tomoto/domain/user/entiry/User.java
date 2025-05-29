@@ -40,7 +40,8 @@ public class User {
     @Builder.Default
     private int level = 1;
 
-    private int totalPomo;
+    @Setter
+    private int totalPomo = 1;
 
     @OneToMany(mappedBy = "user")
     private List<Todo> todos = new ArrayList<>();
