@@ -23,17 +23,17 @@ public class PomoService {
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
-        log.info("user: {}", user);
 
         LocalDateTime startOfDay = LocalDateTime.now().toLocalDate().atStartOfDay();  // 오늘 00:00
         LocalDateTime endOfDay = startOfDay.plusDays(1);
 
         Optional<Pomo> pomo = pomoRepository.findByUserAndCreatedAtBetween(user, startOfDay, endOfDay);
-        log.info("pomo: {}", pomo);
         if(pomo.isPresent()){
-            Pomo presentPomo = pomo.get();
-            presentPomo.setPomo_num(presentPomo.getPomo_num() + 1);
-            pomoRepository.save(presentPomo);
+            Pomo todayPomo = pomo.get();
+            todayPomo.setPomo_num(todayPomo.getPomo_num() + 1);
+            user.setTotalPomo(user.getTotalPomo() + 1);
+            userRepository.save(user);
+            pomoRepository.save(todayPomo);
         }else{
             Pomo newPomo = Pomo.create(user);
             pomoRepository.save(newPomo);
@@ -44,12 +44,10 @@ public class PomoService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        log.info("user: {}", user);
         LocalDateTime startOfDay = LocalDateTime.now().toLocalDate().atStartOfDay();  // 오늘 00:00
         LocalDateTime endOfDay = startOfDay.plusDays(1);
 
         Optional<Pomo> pomo = pomoRepository.findByUserAndCreatedAtBetween(user, startOfDay, endOfDay);
-        log.info("pomo: {}", pomo);
 //        if(pomo.isPresent()){
 //            return pomo.get().getPomo_num();
 //        }else{
