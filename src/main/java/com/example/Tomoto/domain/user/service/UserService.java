@@ -4,7 +4,7 @@ import com.example.Tomoto.domain.user.dto.request.UserLoginReq;
 import com.example.Tomoto.domain.user.dto.request.UserRegisterReq;
 import com.example.Tomoto.domain.user.dto.response.UserSettingsRes;
 import com.example.Tomoto.domain.user.dto.response.UserTokenRes;
-import com.example.Tomoto.domain.user.entiry.User;
+import com.example.Tomoto.domain.user.entity.User;
 import com.example.Tomoto.domain.user.repository.UserRepository;
 import com.example.Tomoto.global.jwt.JwtProvider;
 import jakarta.transaction.Transactional;

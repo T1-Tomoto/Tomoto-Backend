@@ -1,9 +1,9 @@
-package com.example.Tomoto.domain.user.entiry;
+package com.example.Tomoto.domain.user.entity;
 
-import com.example.Tomoto.domain.friends.entiry.Friend;
-import com.example.Tomoto.domain.music.entiry.Music;
-import com.example.Tomoto.domain.pomo.entiry.Pomo;
-import com.example.Tomoto.domain.todo.entiry.Todo;
+import com.example.Tomoto.domain.friends.entity.Friend;
+import com.example.Tomoto.domain.music.entity.Music;
+import com.example.Tomoto.domain.pomo.entity.Pomo;
+import com.example.Tomoto.domain.todo.entity.Todo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,7 +26,7 @@ public class User {
     private Long userId;
 
     @Column(nullable = false)
-    private String id;
+    private String id; //로그인 id값
 
     @Column(nullable = false)
     private String password;
@@ -46,8 +46,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Todo> todos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
-    private List<Friend> friends = new ArrayList<>();
+//    @OneToMany(mappedBy = "user")
+//    private List<Friend> friends = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private List<Music> musics = new ArrayList<>();

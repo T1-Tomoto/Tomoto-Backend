@@ -1,7 +1,7 @@
 package com.example.Tomoto.domain.pomo.repository;
 
-import com.example.Tomoto.domain.pomo.entiry.Pomo;
-import com.example.Tomoto.domain.user.entiry.User;
+import com.example.Tomoto.domain.pomo.entity.Pomo;
+import com.example.Tomoto.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;

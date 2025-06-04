@@ -1,6 +1,6 @@
-package com.example.Tomoto.domain.pomo.entiry;
+package com.example.Tomoto.domain.pomo.entity;
 
-import com.example.Tomoto.domain.user.entiry.User;
+import com.example.Tomoto.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

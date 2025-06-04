@@ -1,8 +1,8 @@
 package com.example.Tomoto.domain.pomo.service;
 
-import com.example.Tomoto.domain.pomo.entiry.Pomo;
+import com.example.Tomoto.domain.pomo.entity.Pomo;
 import com.example.Tomoto.domain.pomo.repository.PomoRepository;
-import com.example.Tomoto.domain.user.entiry.User;
+import com.example.Tomoto.domain.user.entity.User;
 import com.example.Tomoto.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
