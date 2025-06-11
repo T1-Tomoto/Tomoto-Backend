@@ -2,6 +2,7 @@ package com.example.Tomoto.domain.user.service;
 
 import com.example.Tomoto.domain.user.dto.request.UserLoginReq;
 import com.example.Tomoto.domain.user.dto.request.UserRegisterReq;
+import com.example.Tomoto.domain.user.dto.response.AllUserInfoRes;
 import com.example.Tomoto.domain.user.dto.response.UserSettingsRes;
 import com.example.Tomoto.domain.user.dto.response.UserTokenRes;
 import com.example.Tomoto.domain.user.entity.User;
@@ -10,6 +11,8 @@ import com.example.Tomoto.global.jwt.JwtProvider;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -44,5 +47,16 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
         return new UserSettingsRes(user.getId(), user.getNickname(), user.getLevel(), user.getTotalPomo());
+    }
+
+    public List<AllUserInfoRes> getAllUserInfo() {
+        return userRepository.findAllUserDetails();
+    }
+
+    @Transactional
+    public void levelUp(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        int currentLevel = user.getLevel();
+        user.setLevel(currentLevel + 1);
     }
 }
