@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "뽀모도로", description = "뽀모도로, 타이머 API")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/timer")
+@RequestMapping("/pomos")
 public class PomoController {
     private final PomoService pomoService;
 
