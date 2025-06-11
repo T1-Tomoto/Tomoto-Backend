@@ -7,6 +7,7 @@ import com.example.Tomoto.domain.todo.repository.TodoRepository;
 import com.example.Tomoto.domain.user.entity.User;
 import com.example.Tomoto.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +24,17 @@ public class TodoService {
         return todoRepository.findAllByUserOrderByCreatedAt(user);
     }
 
-    public ResponseEntity<AddTodoReq> addTodo(Long usserId, AddTodoReq req) {
+    public Long addTodo(Long usserId, AddTodoReq req) {
         User user = userRepository.findById(usserId).orElseThrow();
         Todo newTodo = Todo.create(
                 user, req.getContent(), req.getDueDtae()
         );
         todoRepository.save(newTodo);
-        return ResponseEntity.ok(req);
+        return newTodo.getTodoId();
+    }
+
+    public void deleteTodo(Long todoId) {
+        Todo deleteTodo = todoRepository.findById(todoId).orElseThrow();
+        todoRepository.delete(deleteTodo);
     }
 }

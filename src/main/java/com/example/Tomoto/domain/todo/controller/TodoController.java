@@ -3,6 +3,7 @@ package com.example.Tomoto.domain.todo.controller;
 import com.example.Tomoto.domain.pomo.dto.response.DailyPomoCountDto;
 import com.example.Tomoto.domain.pomo.service.PomoService;
 import com.example.Tomoto.domain.todo.dto.request.AddTodoReq;
+import com.example.Tomoto.domain.todo.dto.response.PostTodoRes;
 import com.example.Tomoto.domain.todo.dto.response.TodoMainRes;
 import com.example.Tomoto.domain.todo.dto.response.TodoPageRes;
 import com.example.Tomoto.domain.todo.service.TodoService;
@@ -34,7 +35,16 @@ public class TodoController {
 
     @PostMapping("/add")
     @Operation(summary = "투두 추가", description = "유저가 입력한 투두를 추가합니다.")
-    public ResponseEntity<AddTodoReq> addTodo(@Parameter(hidden = true) @Jwt Long userId, @RequestBody AddTodoReq req){
-        return todoService.addTodo(userId, req);
+    public ResponseEntity<PostTodoRes> addTodo(@Parameter(hidden = true) @Jwt Long userId, @RequestBody AddTodoReq req){
+        Long todoId = todoService.addTodo(userId, req);
+        return ResponseEntity.ok(new PostTodoRes(todoId));
     }
+
+    @PostMapping("/delete/{todoId}")
+    @Operation(summary = "투두 삭제", description = "유저가 선택한 투두를 삭제합니다.")
+    public ResponseEntity<PostTodoRes> deleteTodo(@PathVariable Long todoId){
+        todoService.deleteTodo(todoId);
+        return ResponseEntity.ok(new PostTodoRes(todoId)); // 삭제된 todoId 반환
+    }
+
 }
