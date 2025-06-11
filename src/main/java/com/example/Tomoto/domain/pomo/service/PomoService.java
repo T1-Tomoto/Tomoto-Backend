@@ -1,14 +1,16 @@
 package com.example.Tomoto.domain.pomo.service;
 
-import com.example.Tomoto.domain.pomo.entiry.Pomo;
+import com.example.Tomoto.domain.pomo.dto.response.DailyPomoCountDto;
+import com.example.Tomoto.domain.pomo.entity.Pomo;
 import com.example.Tomoto.domain.pomo.repository.PomoRepository;
-import com.example.Tomoto.domain.user.entiry.User;
+import com.example.Tomoto.domain.user.entity.User;
 import com.example.Tomoto.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -30,7 +32,7 @@ public class PomoService {
         Optional<Pomo> pomo = pomoRepository.findByUserAndCreatedAtBetween(user, startOfDay, endOfDay);
         if(pomo.isPresent()){
             Pomo todayPomo = pomo.get();
-            todayPomo.setPomo_num(todayPomo.getPomo_num() + 1);
+            todayPomo.setPomoNum(todayPomo.getPomoNum() + 1);
             user.setTotalPomo(user.getTotalPomo() + 1);
             userRepository.save(user);
             pomoRepository.save(todayPomo);
@@ -53,7 +55,13 @@ public class PomoService {
 //        }else{
 //            return 0;
 //        }
-        return pomo.map(Pomo::getPomo_num).orElse(0);
+        return pomo.map(Pomo::getPomoNum).orElse(0);
 
+    }
+
+    public List<DailyPomoCountDto> dailyPomoCount(Long userId){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        return pomoRepository.findByUserOrderByCreatedAtDesc(user);
     }
 }

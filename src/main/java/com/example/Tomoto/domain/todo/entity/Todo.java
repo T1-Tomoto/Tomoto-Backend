@@ -1,6 +1,6 @@
-package com.example.Tomoto.domain.todo.entiry;
+package com.example.Tomoto.domain.todo.entity;
 
-import com.example.Tomoto.domain.user.entiry.User;
+import com.example.Tomoto.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -27,6 +27,8 @@ public class Todo {
     private LocalDateTime dueDate;
 
     private String content;
+
+    private boolean completed; //해당 투두를 했는지 안 했는지
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

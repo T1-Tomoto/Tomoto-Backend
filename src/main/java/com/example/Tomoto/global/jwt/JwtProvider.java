@@ -1,6 +1,6 @@
 package com.example.Tomoto.global.jwt;
 
-import com.example.Tomoto.domain.user.entiry.User;
+import com.example.Tomoto.domain.user.entity.User;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;

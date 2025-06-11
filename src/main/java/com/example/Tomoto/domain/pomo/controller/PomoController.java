@@ -22,7 +22,7 @@ public class PomoController {
 
     @GetMapping("")
     @Operation(summary = "뽀모도로 횟수 가져오기", description = "유저가 오늘 공부한 뽀모도로 횟수를 가져옵니다.")
-    public int getTodatPomo(@Parameter(hidden = true) @Jwt Long userId) {
+    public int getTodayPomo(@Parameter(hidden = true) @Jwt Long userId) {
         return pomoService.getTodayPomo(userId);
     }
 

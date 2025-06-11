@@ -1,6 +1,6 @@
-package com.example.Tomoto.domain.music.entiry;
+package com.example.Tomoto.domain.music.entity;
 
-import com.example.Tomoto.domain.user.entiry.User;
+import com.example.Tomoto.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

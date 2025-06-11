@@ -1,6 +1,6 @@
-package com.example.Tomoto.domain.pomo.entiry;
+package com.example.Tomoto.domain.pomo.entity;
 
-import com.example.Tomoto.domain.user.entiry.User;
+import com.example.Tomoto.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -29,7 +29,7 @@ public class Pomo {
     private LocalDateTime createdAt;
 
     @Setter
-    private int pomo_num = 1; //오늘 하루동안 몇 번
+    private int pomoNum = 1; //오늘 하루동안 몇 번
 
     public static Pomo create(User user){
         return Pomo.builder()
