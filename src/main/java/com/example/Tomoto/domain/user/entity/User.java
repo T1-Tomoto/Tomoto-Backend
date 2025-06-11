@@ -10,6 +10,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -42,6 +43,11 @@ public class User {
 
     @Setter
     private int totalPomo = 1;
+
+    @ElementCollection
+    private List<Boolean> flags = new ArrayList<>(Collections.nCopies(13, false));
+
+
 
     @OneToMany(mappedBy = "user")
     private List<Todo> todos = new ArrayList<>();
