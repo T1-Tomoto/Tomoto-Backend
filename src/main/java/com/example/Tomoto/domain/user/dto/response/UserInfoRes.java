@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class UserSettingsRes {
+public class UserInfoRes {
 
     @Schema(description = "아이디")
     @NotBlank

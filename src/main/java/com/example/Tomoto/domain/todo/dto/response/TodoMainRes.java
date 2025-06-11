@@ -6,23 +6,19 @@ import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 public record TodoMainRes(
+        @Schema(description = "투두를 만든 날짜")
+        @NotBlank
         LocalDateTime createdAt,
+
+        @Schema(description = "투두의 기한")
         LocalDateTime dueDate,
+
+        @Schema(description = "내용")
+        @NotBlank
         String content,
+
+        @Schema(description = "완료 여부")
+        @NotBlank
         boolean completed) {
 
-//    @Schema(description = "투두를 만든 날짜")
-//    @NotBlank
-//    private LocalDateTime createdAt;
-//
-//    @Schema(description = "투두의 기한")
-//    private LocalDateTime dueDate;
-//
-//    @Schema(description = "내용")
-//    @NotBlank
-//    private String content;
-//
-//    @Schema(description = "완료 여부")
-//    @NotBlank
-//    private boolean completed;
 }

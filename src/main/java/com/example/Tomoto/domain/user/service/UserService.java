@@ -3,7 +3,7 @@ package com.example.Tomoto.domain.user.service;
 import com.example.Tomoto.domain.user.dto.request.UserLoginReq;
 import com.example.Tomoto.domain.user.dto.request.UserRegisterReq;
 import com.example.Tomoto.domain.user.dto.response.AllUserInfoRes;
-import com.example.Tomoto.domain.user.dto.response.UserSettingsRes;
+import com.example.Tomoto.domain.user.dto.response.UserInfoRes;
 import com.example.Tomoto.domain.user.dto.response.UserTokenRes;
 import com.example.Tomoto.domain.user.entity.User;
 import com.example.Tomoto.domain.user.repository.UserRepository;
@@ -43,10 +43,10 @@ public class UserService {
         return new UserTokenRes(accessToken);
     }
 
-    public UserSettingsRes settings(Long userId) {
+    public UserInfoRes settings(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
-        return new UserSettingsRes(user.getId(), user.getNickname(), user.getLevel(), user.getTotalPomo());
+        return new UserInfoRes(user.getId(), user.getNickname(), user.getLevel(), user.getTotalPomo());
     }
 
     public List<AllUserInfoRes> getAllUserInfo() {
@@ -55,6 +55,7 @@ public class UserService {
 
     @Transactional
     public void levelUp(Long userId) {
+        //TODO: 현재 xp값 업데이트
         User user = userRepository.findById(userId).orElseThrow();
         int currentLevel = user.getLevel();
         user.setLevel(currentLevel + 1);
