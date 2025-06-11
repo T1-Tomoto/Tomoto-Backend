@@ -1,5 +1,6 @@
 package com.example.Tomoto.domain.friends.service;
 
+import com.example.Tomoto.domain.friends.dto.response.FriendsRankRes;
 import com.example.Tomoto.domain.friends.entity.Friend;
 import com.example.Tomoto.domain.friends.repository.FriendsRepository;
 import com.example.Tomoto.domain.user.entity.User;
@@ -8,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -25,5 +28,9 @@ public class FriendService {
 
     public void removeFriend(Long userID, Long friendId) {
 
+    }
+
+    public List<FriendsRankRes> getFriendsRanking(Long userId) {
+        return friendsRepository.findMutualFriendsRank(userId);
     }
 }

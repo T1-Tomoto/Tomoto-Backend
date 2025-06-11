@@ -35,17 +35,18 @@ public class User {
     @Column(nullable = false)
     private String nickname;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @Builder.Default
+    @Setter
     private int level = 1;
 
     @Setter
-    private int totalPomo = 1;
+    private int totalPomo = 1; //지금까지 공부한 뽀모도로 수
 
-    @ElementCollection
-    private List<Boolean> flags = new ArrayList<>(Collections.nCopies(13, false));
+//    @ElementCollection
+//    private List<Boolean> flags = new ArrayList<>(Collections.nCopies(13, false));
 
 
 

@@ -42,4 +42,10 @@ public class UserController {
     public ResponseEntity<UserSettingsRes> getUserSettings(@Parameter(hidden = true) @Jwt Long userId) {
         return ResponseEntity.ok(userService.settings(userId));
     }
+
+    @Operation(summary = "레벨업", description = "유저 레벨 +1")
+    @PostMapping("/level-up")
+    public void levelUp(@Parameter(hidden = true) @Jwt Long userId) {
+        userService.levelUp(userId);
+    }
 }
