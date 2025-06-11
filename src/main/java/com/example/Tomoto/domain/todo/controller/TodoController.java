@@ -2,6 +2,7 @@ package com.example.Tomoto.domain.todo.controller;
 
 import com.example.Tomoto.domain.pomo.dto.response.DailyPomoCountDto;
 import com.example.Tomoto.domain.pomo.service.PomoService;
+import com.example.Tomoto.domain.todo.dto.request.AddTodoReq;
 import com.example.Tomoto.domain.todo.dto.response.TodoMainRes;
 import com.example.Tomoto.domain.todo.dto.response.TodoPageRes;
 import com.example.Tomoto.domain.todo.service.TodoService;
@@ -10,11 +11,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Tag(name = "투두 리스트", description = "투두리스트 API")
@@ -31,5 +30,11 @@ public class TodoController {
         List<DailyPomoCountDto> dailyPomoCountDtos = pomoService.dailyPomoCount(userId);
         List<TodoMainRes> todoMainResList = todoService.findAll(userId);
         return new TodoPageRes(dailyPomoCountDtos, todoMainResList);
+    }
+
+    @PostMapping("/add")
+    @Operation(summary = "투두 추가", description = "유저가 입력한 투두를 추가합니다.")
+    public ResponseEntity<AddTodoReq> addTodo(@Parameter(hidden = true) @Jwt Long userId, @RequestBody AddTodoReq req){
+        return todoService.addTodo(userId, req);
     }
 }
