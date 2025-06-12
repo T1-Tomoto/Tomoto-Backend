@@ -32,7 +32,7 @@ public class FriendsController {
 
     @PostMapping("/friends")
     @Operation(summary = "친구 추가", description = "친구를 추가합니다.")
-    public ResponseEntity<String> addFriend(@Parameter(hidden = true) @Jwt Long userId, AddFriendReq req){
+    public ResponseEntity<String> addFriend(@Parameter(hidden = true) @Jwt Long userId, @RequestBody AddFriendReq req){
         friendService.addFriend(userId, req);
         return ResponseEntity.ok("친구 추가 완료");
     }
