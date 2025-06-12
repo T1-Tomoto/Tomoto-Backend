@@ -9,5 +9,5 @@ public record TodoPageRes(
         @Schema(description = "날짜별 뽀모도로 횟수 목록")
         List<DailyPomoCountDto> dailyPomoCounts,
         @Schema(description = "투두 목록")
-        List<TodoMainRes> todos) {
+        List<AllTodoRes> todos) {
 }

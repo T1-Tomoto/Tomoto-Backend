@@ -20,8 +20,8 @@ public class Todo {
     @Column(name = "todo_id")
     private Long todoId;
 
-    @CreationTimestamp
-    private LocalDateTime createdAt;
+//    @CreationTimestamp
+//    private LocalDateTime createdAt;
 
     @CreationTimestamp
     private LocalDateTime dueDate;
@@ -38,7 +38,6 @@ public class Todo {
         return Todo.builder()
                 .user(user)
                 .content(content)
-                .createdAt(LocalDateTime.now())
                 .dueDate(dueDate)
                 .build();
     }

@@ -5,10 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 
-public record TodoMainRes(
-        @Schema(description = "투두를 만든 날짜")
-        @NotBlank
-        LocalDateTime createdAt,
+public record AllTodoRes(
 
         @Schema(description = "투두의 기한")
         LocalDateTime dueDate,
