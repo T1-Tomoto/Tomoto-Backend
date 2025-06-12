@@ -23,7 +23,6 @@ public class Todo {
 //    @CreationTimestamp
 //    private LocalDateTime createdAt;
 
-    @CreationTimestamp
     private LocalDateTime dueDate;
 
     private String content;
