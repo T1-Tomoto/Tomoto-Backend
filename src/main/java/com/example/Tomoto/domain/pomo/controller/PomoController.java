@@ -38,7 +38,7 @@ public class PomoController {
 
     @GetMapping("/history")
     @Operation(summary = "모든 뽀모도로 횟수 가져오기", description = "뽀모도로 기록을 가져옵니다. 투두리스트 캘린더에서 사용합니다.")
-    public List<DailyPomoCountDto> getAllTodo(@Parameter(hidden = true) @Jwt Long userId){
+    public List<DailyPomoCountDto> getAllPomoHistory(@Parameter(hidden = true) @Jwt Long userId){
         return pomoService.dailyPomoCount(userId);
     }
 
