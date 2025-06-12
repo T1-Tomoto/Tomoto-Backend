@@ -25,7 +25,7 @@ public class TodoService {
     public Long addTodo(Long usserId, AddTodoReq req) {
         User user = userRepository.findById(usserId).orElseThrow();
         Todo newTodo = Todo.create(
-                user, req.getContent(), req.getDueDtae()
+                user, req.getContent(), req.getDueDate()
         );
         todoRepository.save(newTodo);
         return newTodo.getTodoId();
