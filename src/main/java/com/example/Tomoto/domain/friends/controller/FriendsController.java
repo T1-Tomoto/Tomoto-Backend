@@ -1,5 +1,6 @@
 package com.example.Tomoto.domain.friends.controller;
 
+import com.example.Tomoto.domain.friends.dto.request.AddFriendReq;
 import com.example.Tomoto.domain.friends.dto.request.FriendShipReq;
 import com.example.Tomoto.domain.friends.dto.response.FriendsRankRes;
 import com.example.Tomoto.domain.friends.service.FriendService;
@@ -31,9 +32,9 @@ public class FriendsController {
 
     @PostMapping("/friends")
     @Operation(summary = "친구 추가", description = "친구를 추가합니다.")
-    public ResponseEntity<FriendShipReq> addFriend(@Parameter(hidden = true) @Jwt Long userId, String friendName){
-        friendService.addFriend(userId, friendName);
-        return ResponseEntity.ok(new FriendShipReq());
+    public ResponseEntity<String> addFriend(@Parameter(hidden = true) @Jwt Long userId, AddFriendReq req){
+        friendService.addFriend(userId, req);
+        return ResponseEntity.ok("친구 추가 완료");
     }
 
     @GetMapping("/friends")

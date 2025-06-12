@@ -1,5 +1,6 @@
 package com.example.Tomoto.domain.friends.service;
 
+import com.example.Tomoto.domain.friends.dto.request.AddFriendReq;
 import com.example.Tomoto.domain.friends.dto.response.FriendsRankRes;
 import com.example.Tomoto.domain.friends.entity.Friend;
 import com.example.Tomoto.domain.friends.repository.FriendsRepository;
@@ -19,8 +20,8 @@ public class FriendService {
     private final FriendsRepository friendsRepository;
     private final UserRepository userRepository;
 
-    public void addFriend(Long userID, String friendName) {
-        User friend = userRepository.findByNickname(friendName).get();
+    public void addFriend(Long userID, AddFriendReq addFriendReq) {
+        User friend = userRepository.findByNickname(addFriendReq.friendName()).get();
         Long friendId = friend.getUserId();
         Friend friendShip = Friend.create(userID, friendId);
         friendsRepository.save(friendShip);
