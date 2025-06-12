@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 public record AllTodoRes(
+        @Schema(description = "투두 고유 id")
+        @NotBlank
+        Long todoId,
 
         @Schema(description = "투두의 기한")
         LocalDateTime dueDate,

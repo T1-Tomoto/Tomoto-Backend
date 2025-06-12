@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface TodoRepository extends JpaRepository<Todo, Long> {
 
-    @Query("SELECT new com.example.Tomoto.domain.todo.dto.response.AllTodoRes(t.dueDate, t.content, t.completed) " +
+    @Query("SELECT new com.example.Tomoto.domain.todo.dto.response.AllTodoRes(t.todoId, t.dueDate, t.content, t.completed) " +
             "FROM Todo t WHERE t.user = :user ORDER BY t.dueDate ASC")
     List<AllTodoRes> findAllByUserOrderByCreatedAt(@Param("user") User user);
 }

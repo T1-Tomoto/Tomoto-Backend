@@ -2,6 +2,7 @@ package com.example.Tomoto.domain.friends.controller;
 
 import com.example.Tomoto.domain.friends.dto.request.AddFriendReq;
 import com.example.Tomoto.domain.friends.dto.request.FriendShipReq;
+import com.example.Tomoto.domain.friends.dto.response.AddFriendRes;
 import com.example.Tomoto.domain.friends.dto.response.FriendsRankRes;
 import com.example.Tomoto.domain.friends.service.FriendService;
 import com.example.Tomoto.domain.user.dto.response.AllUserInfoRes;
@@ -32,9 +33,8 @@ public class FriendsController {
 
     @PostMapping("/friends")
     @Operation(summary = "친구 추가", description = "친구를 추가합니다.")
-    public ResponseEntity<String> addFriend(@Parameter(hidden = true) @Jwt Long userId, @RequestBody AddFriendReq req){
-        friendService.addFriend(userId, req);
-        return ResponseEntity.ok("친구 추가 완료");
+    public ResponseEntity<AddFriendRes> addFriend(@Parameter(hidden = true) @Jwt Long userId, @RequestBody AddFriendReq req){
+        return ResponseEntity.ok(friendService.addFriend(userId, req));
     }
 
     @GetMapping("/friends")
@@ -43,13 +43,13 @@ public class FriendsController {
         return friendService.getFriendsRanking(userId);
     }
 
-//    @PostMapping("/friends/{friendId}")
-//    @Operation(summary = "친구 삭제", description = "선택한 친구를 삭제합니다.")
-//    public ResponseEntity<FriendShipReq> deleteFriend(@Parameter(hidden = true) @Jwt Long userId,
-//                               @PathVariable Long friendId){
-//        friendService.removeFriend(userId, friendId);
-//        return ResponseEntity.ok(new FriendShipReq());
-//    }
+    @PostMapping("/friends/{friendId}")
+    @Operation(summary = "친구 삭제", description = "선택한 친구를 삭제합니다.")
+    public ResponseEntity<FriendShipReq> deleteFriend(@Parameter(hidden = true) @Jwt Long userId,
+                               @PathVariable Long friendId){
+        friendService.removeFriend(userId, friendId);
+        return ResponseEntity.ok(new FriendShipReq());
+    }
 
 
 }

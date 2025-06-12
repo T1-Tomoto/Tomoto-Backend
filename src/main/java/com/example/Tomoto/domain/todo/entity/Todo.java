@@ -20,9 +20,6 @@ public class Todo {
     @Column(name = "todo_id")
     private Long todoId;
 
-//    @CreationTimestamp
-//    private LocalDateTime createdAt;
-
     private LocalDateTime dueDate;
 
     private String content;
