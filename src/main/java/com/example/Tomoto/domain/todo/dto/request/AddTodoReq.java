@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class AddTodoReq {
     @Schema(description = "마감기한")
-    private LocalDateTime dueDtae;
+    private LocalDateTime dueDate;
 
     @Schema(description = "투두 내용")
     private String content;
