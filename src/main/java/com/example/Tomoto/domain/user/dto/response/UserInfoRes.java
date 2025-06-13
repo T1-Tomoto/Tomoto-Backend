@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 public class UserInfoRes {
@@ -26,4 +28,6 @@ public class UserInfoRes {
     @Schema(description = "유저의 총 포모도로 횟수")
     @NotBlank
     private int totalPomo;
+
+    private List<Boolean> challenges;
 }

@@ -47,7 +47,7 @@ public class UserService {
     public UserInfoRes settings(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
-        return new UserInfoRes(user.getId(), user.getNickname(), user.getLevel(), user.getXp(), user.getTotalPomo());
+        return new UserInfoRes(user.getId(), user.getNickname(), user.getLevel(), user.getXp(), user.getTotalPomo(), user.getChallenges());
     }
 
     public List<AllUserInfoRes> getAllUserInfo() {
@@ -58,5 +58,15 @@ public class UserService {
     public void levelXpUp(Long userId, LevelAndExpUpdateReq req) {
         User user = userRepository.findById(userId).orElseThrow();
         user.updateXpAndLevel(req.level(), req.xp());
+    }
+
+    @Transactional
+    public void updateChallenges(Long userId, List<Boolean> updatedChallenges) {
+        if (updatedChallenges == null || updatedChallenges.size() != 13) {
+            throw new IllegalArgumentException("챌린지 리스트는 13개의 요소가 필요합니다.");
+        }
+
+        User user = userRepository.findById(userId).orElseThrow();
+        user.setChallenges(updatedChallenges);
     }
 }

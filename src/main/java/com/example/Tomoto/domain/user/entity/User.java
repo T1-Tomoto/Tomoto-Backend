@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Entity
 @Getter
@@ -60,6 +62,12 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Pomo> pomos = new ArrayList<>();
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Builder.Default
+    private List<Boolean> challenges = IntStream.range(0, 13)
+            .mapToObj(i -> false)
+            .toList();
 
 
     public static User create(String id, String password, String nickname) {

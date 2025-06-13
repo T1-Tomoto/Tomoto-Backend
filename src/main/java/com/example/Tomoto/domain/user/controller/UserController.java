@@ -1,5 +1,6 @@
 package com.example.Tomoto.domain.user.controller;
 
+import com.example.Tomoto.domain.user.dto.request.ChallengeUpdateReq;
 import com.example.Tomoto.domain.user.dto.request.LevelAndExpUpdateReq;
 import com.example.Tomoto.domain.user.dto.request.UserLoginReq;
 import com.example.Tomoto.domain.user.dto.request.UserRegisterReq;
@@ -48,5 +49,15 @@ public class UserController {
     @PatchMapping("/level")
     public void levelXpUp(@Parameter(hidden = true) @Jwt Long userId, LevelAndExpUpdateReq req) {
         userService.levelXpUp(userId, req);
+    }
+
+    @PatchMapping("/challenges")
+    @Operation(summary = "챌린지 상태 수정", description = "13개 챌린지 상태를 수정합니다.")
+    public ResponseEntity<Void> updateChallenges(
+            @Parameter(hidden = true) @Jwt Long userId,
+            @RequestBody ChallengeUpdateReq req
+    ) {
+        userService.updateChallenges(userId, req.challenges());
+        return ResponseEntity.ok().build();
     }
 }
