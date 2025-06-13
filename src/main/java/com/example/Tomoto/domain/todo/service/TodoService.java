@@ -8,10 +8,12 @@ import com.example.Tomoto.domain.user.entity.User;
 import com.example.Tomoto.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class TodoService {
     private final TodoRepository todoRepository;
@@ -34,5 +36,12 @@ public class TodoService {
     public void deleteTodo(Long todoId) {
         Todo deleteTodo = todoRepository.findById(todoId).orElseThrow();
         todoRepository.delete(deleteTodo);
+    }
+
+    public void toggleTodoCompletion(Long todoId) {
+        Todo toggleTodo = todoRepository.findById(todoId).orElseThrow();
+        boolean currentToggle = toggleTodo.isCompleted();
+        toggleTodo.setCompleted(!currentToggle);
+        todoRepository.save(toggleTodo);
     }
 }

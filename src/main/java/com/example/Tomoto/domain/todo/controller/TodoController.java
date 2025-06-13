@@ -45,4 +45,10 @@ public class TodoController {
         return ResponseEntity.ok(new PostTodoRes(todoId)); // 삭제된 todoId 반환
     }
 
+    @PatchMapping("/{todoId}")
+    @Operation(summary = "투두 토글", description = "선택한 투두의 complete를 변경합니다.")
+    public void completeTodo(@PathVariable Long todoId){
+        todoService.toggleTodoCompletion(todoId);
+    }
+
 }

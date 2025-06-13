@@ -24,6 +24,8 @@ public class Todo {
 
     private String content;
 
+    @Setter
+    @Getter
     private boolean completed; //해당 투두를 했는지 안 했는지
 
     @ManyToOne(fetch = FetchType.LAZY)
