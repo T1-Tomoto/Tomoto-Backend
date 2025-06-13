@@ -57,6 +57,6 @@ public class UserService {
     @Transactional
     public void levelXpUp(Long userId, LevelAndExpUpdateReq req) {
         User user = userRepository.findById(userId).orElseThrow();
-        user.updateXpAndLevel(req.xp(), req.level());
+        user.updateXpAndLevel(req.level(), req.xp());
     }
 }
