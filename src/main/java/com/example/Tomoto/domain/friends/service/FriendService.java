@@ -21,16 +21,30 @@ public class FriendService {
     private final FriendsRepository friendsRepository;
     private final UserRepository userRepository;
 
-    public AddFriendRes addFriend(Long userID, AddFriendReq addFriendReq) {
-        User friend = userRepository.findByNickname(addFriendReq.friendName()).get();
+    public void addFriend(Long userID, AddFriendReq req) {
+
+        User friend = userRepository.findByNickname(req.friendName())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저입니다."));
         Long friendId = friend.getUserId();
+
+        boolean exists = friendsRepository.existsByFromIdAndToId(userID, friendId);
+        if (exists){
+            throw new IllegalArgumentException("이미 친구로 등록된 사용자입니다.");
+        }
         Friend friendShip = Friend.create(userID, friendId);
         friendsRepository.save(friendShip);
-        return new AddFriendRes(friendId);
     }
 
-    public void removeFriend(Long userID, Long friendId) {
+    public void removeFriend(Long userId, String friendName) {
+        Long friendId = userRepository.findByNickname(friendName)
+                .orElseThrow(() -> new IllegalArgumentException("해당 닉네임의 유저가 존재하지 않습니다."))
+                .getUserId();
 
+        Friend friend = friendsRepository
+                .findByFromIdAndToIdOrFromIdAndToId(userId, friendId, friendId, userId)
+                .orElseThrow(() -> new IllegalArgumentException("친구 관계가 존재하지 않습니다."));
+
+        friendsRepository.delete(friend);
     }
 
     public List<FriendsRankRes> getFriendsRanking(Long userId) {

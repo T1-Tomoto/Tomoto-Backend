@@ -33,8 +33,8 @@ public class FriendsController {
 
     @PostMapping("/friends")
     @Operation(summary = "친구 추가", description = "친구를 추가합니다.")
-    public ResponseEntity<AddFriendRes> addFriend(@Parameter(hidden = true) @Jwt Long userId, @RequestBody AddFriendReq req){
-        return ResponseEntity.ok(friendService.addFriend(userId, req));
+    public void addFriend(@Parameter(hidden = true) @Jwt Long userId, @RequestBody AddFriendReq req){
+        friendService.addFriend(userId, req);
     }
 
     @GetMapping("/friends")
@@ -43,13 +43,11 @@ public class FriendsController {
         return friendService.getFriendsRanking(userId);
     }
 
-    @PostMapping("/friends/{friendId}")
+    @DeleteMapping("/friends")
     @Operation(summary = "친구 삭제", description = "선택한 친구를 삭제합니다.")
-    public ResponseEntity<FriendShipReq> deleteFriend(@Parameter(hidden = true) @Jwt Long userId,
-                               @PathVariable Long friendId){
-        friendService.removeFriend(userId, friendId);
-        return ResponseEntity.ok(new FriendShipReq());
+    public void deleteFriend(@Parameter(hidden = true) @Jwt Long userId,
+                               String nickname){
+        friendService.removeFriend(userId, nickname);
     }
-
 
 }
