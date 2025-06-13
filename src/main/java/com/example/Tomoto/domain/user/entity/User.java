@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 @Getter
 @Builder
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonDeserialize(builder = User.UserBuilder.class)
@@ -54,9 +55,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Todo> todos = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "user")
-//    private List<Friend> friends = new ArrayList<>();
-
     @OneToMany(mappedBy = "user")
     private List<Music> musics = new ArrayList<>();
 
@@ -76,5 +74,10 @@ public class User {
     public void updateXpAndLevel(int level, int xp) {
         this.level = level;
         this.xp = xp;
+    }
+
+    public void addMusic(Music music) {
+        this.musics.add(music);
+        this.setUserId(this.getUserId());
     }
 }
