@@ -47,7 +47,7 @@ public class UserController {
 
     @Operation(summary = "레벨 업데이트", description = "레벨 및 xp 정보 업데이트")
     @PatchMapping("/level")
-    public void levelXpUp(@Parameter(hidden = true) @Jwt Long userId, LevelAndExpUpdateReq req) {
+    public void levelXpUp(@Parameter(hidden = true) @Jwt Long userId, @RequestBody LevelAndExpUpdateReq req) {
         userService.levelXpUp(userId, req);
     }
 
