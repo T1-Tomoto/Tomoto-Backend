@@ -1,5 +1,6 @@
 package com.example.Tomoto.domain.user.controller;
 
+import com.example.Tomoto.domain.user.dto.request.LevelAndExpUpdateReq;
 import com.example.Tomoto.domain.user.dto.request.UserLoginReq;
 import com.example.Tomoto.domain.user.dto.request.UserRegisterReq;
 import com.example.Tomoto.domain.user.dto.response.UserInfoRes;
@@ -43,9 +44,9 @@ public class UserController {
         return ResponseEntity.ok(userService.settings(userId));
     }
 
-    @Operation(summary = "레벨업", description = "유저 레벨 +1")
-    @PostMapping("/level-up")
-    public void levelUp(@Parameter(hidden = true) @Jwt Long userId) {
-        userService.levelUp(userId);
+    @Operation(summary = "레벨 업데이트", description = "레벨 및 xp 정보 업데이트")
+    @PatchMapping("/level")
+    public void levelXpUp(@Parameter(hidden = true) @Jwt Long userId, LevelAndExpUpdateReq req) {
+        userService.levelXpUp(userId, req);
     }
 }

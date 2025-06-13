@@ -43,10 +43,10 @@ public class User {
     private int level = 1;
 
     @Setter
-    private int totalPomo = 1; //지금까지 공부한 뽀모도로 수
+    private int xp = 0;
 
-//    @ElementCollection
-//    private List<Boolean> flags = new ArrayList<>(Collections.nCopies(13, false));
+    @Setter
+    private int totalPomo = 1; //지금까지 공부한 뽀모도로 수
 
 
 
@@ -70,5 +70,10 @@ public class User {
                 .nickname(nickname)
                 .createdAt(LocalDateTime.now())
                 .build();
+    }
+
+    public void updateXpAndLevel(int level, int xp) {
+        this.level = level;
+        this.xp = xp;
     }
 }

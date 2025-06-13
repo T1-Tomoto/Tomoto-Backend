@@ -1,5 +1,6 @@
 package com.example.Tomoto.domain.user.service;
 
+import com.example.Tomoto.domain.user.dto.request.LevelAndExpUpdateReq;
 import com.example.Tomoto.domain.user.dto.request.UserLoginReq;
 import com.example.Tomoto.domain.user.dto.request.UserRegisterReq;
 import com.example.Tomoto.domain.user.dto.response.AllUserInfoRes;
@@ -54,10 +55,8 @@ public class UserService {
     }
 
     @Transactional
-    public void levelUp(Long userId) {
-        //TODO: 현재 xp값 업데이트
+    public void levelXpUp(Long userId, LevelAndExpUpdateReq req) {
         User user = userRepository.findById(userId).orElseThrow();
-        int currentLevel = user.getLevel();
-        user.setLevel(currentLevel + 1);
+        user.updateXpAndLevel(req.xp(), req.level());
     }
 }
