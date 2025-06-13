@@ -21,6 +21,8 @@ public class UserInfoRes {
     @NotBlank
     private int level;
 
+    private int xp;
+
     @Schema(description = "유저의 총 포모도로 횟수")
     @NotBlank
     private int totalPomo;
