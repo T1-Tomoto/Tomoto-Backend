@@ -38,7 +38,7 @@ public class TodoController {
         return ResponseEntity.ok(new PostTodoRes(todoId));
     }
 
-    @PostMapping("/delete/{todoId}")
+    @DeleteMapping("/delete/{todoId}")
     @Operation(summary = "투두 삭제", description = "유저가 선택한 투두를 삭제합니다.")
     public ResponseEntity<PostTodoRes> deleteTodo(@PathVariable Long todoId){
         todoService.deleteTodo(todoId);

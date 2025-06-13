@@ -30,8 +30,20 @@ public class MusicController {
     }
 
     @Operation(summary = "음악 추가", description = "새로운 음악을 추가합니다.")
-    @PostMapping("/add")
-    public void addMusic(@Parameter(hidden = true) @Jwt Long userId, String url ) {
+    @PostMapping("")
+    public void addMusic(@Parameter(hidden = true) @Jwt Long userId, @RequestParam String url ) {
         musicService.addMusic(userId, url);
+    }
+
+    @Operation(summary = "음악 삭제", description = "선택한 음악을 삭제합니다.")
+    @DeleteMapping("")
+    public void deleteMusic(@Parameter(hidden = true) @Jwt Long userId, @RequestParam String url) {
+        musicService.deleteMusic(userId, url);
+    }
+
+    @Operation(summary = "음악 수정", description = "선택한 음악의 Url을 수정합니다.")
+    @PatchMapping("")
+    public void updateMusic(@Parameter(hidden = true) @Jwt Long userId, @RequestParam String url) {
+        musicService.updateMusic(userId, url);
     }
 }
