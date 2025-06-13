@@ -48,7 +48,8 @@ public class User {
     @Setter
     private int totalPomo = 1; //지금까지 공부한 뽀모도로 수
 
-
+    @Column(length = 100)
+    private String bio = "100자 이내의 유저 한줄소개";
 
     @OneToMany(mappedBy = "user")
     private List<Todo> todos = new ArrayList<>();

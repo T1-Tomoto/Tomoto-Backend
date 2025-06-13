@@ -19,9 +19,7 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "todo_id")
     private Long todoId;
-
     private LocalDateTime dueDate;
-
     private String content;
 
     @Setter
