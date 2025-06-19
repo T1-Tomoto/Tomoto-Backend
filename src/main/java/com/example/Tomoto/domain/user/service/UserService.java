@@ -47,7 +47,7 @@ public class UserService {
     public UserInfoRes settings(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회원입니다."));
-        return new UserInfoRes(user.getId(), user.getNickname(), user.getLevel(), user.getXp(), user.getTotalPomo(), user.getChallenges());
+        return new UserInfoRes(user.getId(), user.getNickname(), user.getLevel(), user.getXp(), user.getTotalPomo(), user.getChallenges(), user.getBio());
     }
 
     public List<AllUserInfoRes> getAllUserInfo() {

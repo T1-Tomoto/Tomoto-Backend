@@ -16,7 +16,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByNickname(String nickname);
 
     @Query("SELECT new com.example.Tomoto.domain.user.dto.response.AllUserInfoRes(" +
-            "u.userId, u.nickname, u.level, u.xp, u.bio) " +
+            "u.userId, u.nickname, u.level, u.xp) " +
             "FROM User u ORDER BY u.level DESC")
     List<AllUserInfoRes> findAllUserDetails();
 }
