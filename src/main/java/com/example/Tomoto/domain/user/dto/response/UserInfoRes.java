@@ -30,4 +30,7 @@ public class UserInfoRes {
     private int totalPomo;
 
     private List<Boolean> challenges;
+
+    @Schema(description = "유저 한줄 소개")
+    private String bio;
 }

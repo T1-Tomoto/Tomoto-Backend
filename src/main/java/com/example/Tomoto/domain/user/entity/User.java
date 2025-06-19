@@ -52,7 +52,7 @@ public class User {
     private int totalPomo = 1; //지금까지 공부한 뽀모도로 수
 
     @Column(length = 100)
-    private String bio = "100자 이내의 유저 한줄소개";
+    private String bio = "유저 한줄 소개를 입력해주세요.";
 
     @OneToMany(mappedBy = "user")
     private List<Todo> todos = new ArrayList<>();

@@ -4,7 +4,6 @@ public record AllUserInfoRes(
         Long userId,
         String nickname,
         int level,
-        int xp,
-        String bio
+        int xp
 ) {
 }
