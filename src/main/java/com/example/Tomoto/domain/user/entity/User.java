@@ -66,7 +66,7 @@ public class User {
 
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
-    private List<Boolean> challenges = IntStream.range(0, 13)
+    private List<Boolean> challenges = IntStream.range(0, 11)
             .mapToObj(i -> false)
             .toList();
 
