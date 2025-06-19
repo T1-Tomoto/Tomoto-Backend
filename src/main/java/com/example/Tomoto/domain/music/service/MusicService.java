@@ -1,5 +1,6 @@
 package com.example.Tomoto.domain.music.service;
 
+import com.example.Tomoto.domain.music.dto.request.UpdateMusicReq;
 import com.example.Tomoto.domain.music.dto.response.MusicListRes;
 import com.example.Tomoto.domain.music.entity.Music;
 import com.example.Tomoto.domain.music.repository.MusicRepository;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -44,13 +46,13 @@ public class MusicService {
         musicRepository.delete(music);
     }
 
-    public void updateMusic(Long userId, String url) {
+    public void updateMusic(Long userId, UpdateMusicReq req) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저를 찾을 수 없습니다. ID: " + userId));
 
-        Music music = musicRepository.findByUserAndUrl(user, url)
-                .orElseThrow(() -> new IllegalArgumentException("해당 URL에 대한 음악이 존재하지 않습니다. URL: " + url));
-        music.setUrl(url);
+        Music music = musicRepository.findByUserAndUrl(user, req.oldUrl())
+                .orElseThrow(() -> new IllegalArgumentException("해당 URL에 대한 음악이 존재하지 않습니다. URL: " + req.oldUrl()));
+        music.setUrl(req.newUrl());
         musicRepository.save(music);
     }
 }

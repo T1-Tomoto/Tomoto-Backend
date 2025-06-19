@@ -1,5 +1,6 @@
 package com.example.Tomoto.domain.music.controller;
 
+import com.example.Tomoto.domain.music.dto.request.UpdateMusicReq;
 import com.example.Tomoto.domain.music.dto.response.MusicListRes;
 import com.example.Tomoto.domain.music.entity.Music;
 import com.example.Tomoto.domain.music.service.MusicService;
@@ -25,7 +26,7 @@ public class MusicController {
 
     @Operation(summary = "음악 리스트", description = "유저의 음악 리스트를 불러옵니다.")
     @GetMapping("")
-    public ResponseEntity<List<MusicListRes>> register(@Parameter(hidden = true) @Jwt Long userId ) {
+    public ResponseEntity<List<MusicListRes>> getMusicList(@Parameter(hidden = true) @Jwt Long userId ) {
         return ResponseEntity.ok(musicService.getAllMusic(userId));
     }
 
@@ -43,7 +44,7 @@ public class MusicController {
 
     @Operation(summary = "음악 수정", description = "선택한 음악의 Url을 수정합니다.")
     @PatchMapping("")
-    public void updateMusic(@Parameter(hidden = true) @Jwt Long userId, @RequestParam String url) {
-        musicService.updateMusic(userId, url);
+    public void updateMusic(@Parameter(hidden = true) @Jwt Long userId, @RequestBody UpdateMusicReq req) {
+        musicService.updateMusic(userId, req);
     }
 }
