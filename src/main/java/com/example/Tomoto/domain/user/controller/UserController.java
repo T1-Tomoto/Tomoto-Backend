@@ -45,6 +45,12 @@ public class UserController {
         return ResponseEntity.ok(userService.settings(userId));
     }
 
+    @Operation(summary = "한줄 소개 업데이트", description = "유저 한 줄 소개란을 업데이트 합니다.")
+    @PatchMapping("/info/bio")
+    public void updateUserBio(@Parameter(hidden = true) @Jwt Long userId, @RequestParam String newBio) {
+        userService.updateUserBio(userId, newBio);
+    }
+
     @Operation(summary = "레벨 업데이트", description = "레벨 및 xp 정보 업데이트")
     @PatchMapping("/level")
     public void levelXpUp(@Parameter(hidden = true) @Jwt Long userId, @RequestBody LevelAndExpUpdateReq req) {

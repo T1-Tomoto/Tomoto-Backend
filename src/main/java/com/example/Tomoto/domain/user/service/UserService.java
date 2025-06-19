@@ -69,4 +69,11 @@ public class UserService {
         User user = userRepository.findById(userId).orElseThrow();
         user.setChallenges(updatedChallenges);
     }
+
+    @Transactional
+    public void updateUserBio(Long userId, String newBio) {
+        User user = userRepository.findById(userId).orElseThrow();
+        user.setBio(newBio);
+        userRepository.save(user);
+    }
 }
