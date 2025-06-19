@@ -16,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "유저", description = "유저 API")
 @RequiredArgsConstructor
 @RestController
@@ -61,9 +63,9 @@ public class UserController {
     @Operation(summary = "챌린지 상태 수정", description = "13개 챌린지 상태를 수정합니다.")
     public ResponseEntity<Void> updateChallenges(
             @Parameter(hidden = true) @Jwt Long userId,
-            @RequestBody ChallengeUpdateReq req
-    ) {
-        userService.updateChallenges(userId, req.challenges());
+            @RequestBody List<Boolean> req
+            ) {
+        userService.updateChallenges(userId, req);
         return ResponseEntity.ok().build();
     }
 }

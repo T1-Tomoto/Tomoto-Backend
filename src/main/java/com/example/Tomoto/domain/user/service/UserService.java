@@ -63,7 +63,7 @@ public class UserService {
     @Transactional
     public void updateChallenges(Long userId, List<Boolean> updatedChallenges) {
         if (updatedChallenges == null || updatedChallenges.size() != 11) {
-            throw new IllegalArgumentException("챌린지 리스트는 13개의 요소가 필요합니다.");
+            throw new IllegalArgumentException("챌린지 리스트는 11개의 요소가 필요합니다.");
         }
 
         User user = userRepository.findById(userId).orElseThrow();
