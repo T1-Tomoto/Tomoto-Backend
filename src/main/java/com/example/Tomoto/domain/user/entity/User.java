@@ -89,4 +89,10 @@ public class User {
         this.musics.add(music);
         this.setUserId(this.getUserId());
     }
+
+    public void updateChallenges(List<Boolean> updatedChallenges) {
+        this.challenges.clear();
+        this.challenges.addAll(updatedChallenges);
+    }
+
 }

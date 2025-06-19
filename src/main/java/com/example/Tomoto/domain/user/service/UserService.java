@@ -67,7 +67,7 @@ public class UserService {
         }
 
         User user = userRepository.findById(userId).orElseThrow();
-        user.setChallenges(updatedChallenges);
+        user.updateChallenges(updatedChallenges);
         userRepository.save(user);
     }
 
