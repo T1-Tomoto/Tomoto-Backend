@@ -68,6 +68,7 @@ public class UserService {
 
         User user = userRepository.findById(userId).orElseThrow();
         user.setChallenges(updatedChallenges);
+        userRepository.save(user);
     }
 
     @Transactional
