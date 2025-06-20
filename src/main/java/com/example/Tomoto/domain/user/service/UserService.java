@@ -1,7 +1,9 @@
 package com.example.Tomoto.domain.user.service;
 
+import com.example.Tomoto.domain.friends.dto.request.AddFriendReq;
 import com.example.Tomoto.domain.friends.entity.Friend;
 import com.example.Tomoto.domain.friends.repository.FriendsRepository;
+import com.example.Tomoto.domain.friends.service.FriendService;
 import com.example.Tomoto.domain.pomo.entity.Pomo;
 import com.example.Tomoto.domain.pomo.repository.PomoRepository;
 import com.example.Tomoto.domain.todo.entity.Todo;
@@ -33,6 +35,7 @@ public class UserService {
     private final FriendsRepository friendRepository;
     private final TodoRepository todoRepository;
     private final PomoRepository pomoRepository;
+    private final FriendService friendService;
 
     public UserTokenRes register(UserRegisterReq req) {
         if(userRepository.existsById(req.getId())) {
@@ -97,12 +100,8 @@ public class UserService {
 
     private void createFriendships(User newUser, List<User> dummyFriends) {
         for (User dummyFriend : dummyFriends) {
-            // 양방향 친구 관계 생성
-            Friend friendship1 = Friend.create(newUser.getUserId(), dummyFriend.getUserId());
-            Friend friendship2 = Friend.create(dummyFriend.getUserId(), newUser.getUserId());
-
-            friendRepository.save(friendship1);
-            friendRepository.save(friendship2);
+            AddFriendReq req = new AddFriendReq(dummyFriend.getNickname());
+            friendService.addFriend(newUser.getUserId(), req);
         }
     }
 
