@@ -57,13 +57,8 @@ public class UserService {
         // 2. 더미 친구들 생성 및 저장 (이미 존재하지 않는 경우만)
         List<User> dummyFriends = createOrGetDummyFriends();
 
-        // 3. 친구 관계 생성
         createFriendships(newUser, dummyFriends);
-
-        // 4. 더미 Todo 생성
         createDummyTodos(newUser);
-
-        // 5. 더미 Pomo 히스토리 생성
         createDummyPomoHistory(newUser);
 
         return newUser;
@@ -112,10 +107,29 @@ public class UserService {
                 "독서 30분하기",
                 "운동 1시간하기",
                 "프로젝트 계획서 작성하기",
-                "온라인 강의 1개 수강하기"
+                "온라인 강의 1개 수강하기",
+                "코딩 연습 1시간",
+                "일기 쓰기",
+                "명상 10분",
+                "청소하기",
+                "친구에게 연락하기",
+                "요리하기",
+                "영화 한 편 보기",
+                "새로운 기술 공부하기",
+                "블로그 글 작성하기",
+                "사진 정리하기",
+                "음악 듣기",
+                "자기계발서 읽기",
+                "운동 계획 세우기",
+                "주간 목표 설정하기",
+                "외국어 회화 연습",
+                "가계부 정리하기",
+                "이메일 정리하기",
+                "독서 노트 작성하기",
+                "새로운 레시피 시도하기"
         );
 
-        for (int i = 0; i < 4; i++) { // 4개의 더미 Todo 생성
+        for (int i = 0; i < 25; i++) { // 25개의 더미 Todo 생성
             String content = todoContents.get(i % todoContents.size());
             LocalDateTime dueDate = LocalDateTime.now().plusDays(i + 1);
             boolean completed = Math.random() < 0.3; // 30% 확률로 완료 상태
@@ -132,8 +146,8 @@ public class UserService {
     }
 
     private void createDummyPomoHistory(User user) {
-        // 최근 7일간의 뽀모도로 히스토리 생성
-        for (int i = 1; i <= 7; i++) {
+        // 최근 3주간의 뽀모도로 히스토리 생성 (오늘 제외, 21일)
+        for (int i = 1; i <= 21; i++) {
             LocalDateTime date = LocalDateTime.now().minusDays(i).withHour(9).withMinute(0).withSecond(0);
             int pomoCount = (int)(Math.random() * 8) + 1; // 1-8개 랜덤
 
@@ -142,16 +156,7 @@ public class UserService {
                     .pomoNum(pomoCount)
                     .build();
 
-//            // createdAt을 수동으로 설정 (테스트용)
-//            try {
-//                Field createdAtField = Pomo.class.getDeclaredField("createdAt");
-//                createdAtField.setAccessible(true);
-//                createdAtField.set(pomo, date);
-//            } catch (Exception e) {
-//                // 실패 시 현재 시간으로 설정
-//            }
             pomo.setCreatedAt(date);
-
             pomoRepository.save(pomo);
         }
 
@@ -163,6 +168,7 @@ public class UserService {
         user.setTotalPomo(totalPomos);
         userRepository.save(user);
     }
+
 
     // 기존 메서드들은 그대로 유지
     public UserTokenRes login(UserLoginReq req) {
