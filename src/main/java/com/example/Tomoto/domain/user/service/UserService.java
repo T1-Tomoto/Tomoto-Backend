@@ -143,14 +143,15 @@ public class UserService {
                     .pomoNum(pomoCount)
                     .build();
 
-            // createdAt을 수동으로 설정 (테스트용)
-            try {
-                Field createdAtField = Pomo.class.getDeclaredField("createdAt");
-                createdAtField.setAccessible(true);
-                createdAtField.set(pomo, date);
-            } catch (Exception e) {
-                // 실패 시 현재 시간으로 설정
-            }
+//            // createdAt을 수동으로 설정 (테스트용)
+//            try {
+//                Field createdAtField = Pomo.class.getDeclaredField("createdAt");
+//                createdAtField.setAccessible(true);
+//                createdAtField.set(pomo, date);
+//            } catch (Exception e) {
+//                // 실패 시 현재 시간으로 설정
+//            }
+            pomo.setCreatedAt(date);
 
             pomoRepository.save(pomo);
         }

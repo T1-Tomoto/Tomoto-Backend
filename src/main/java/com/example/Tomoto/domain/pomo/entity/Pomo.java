@@ -25,7 +25,8 @@ public class Pomo {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @CreationTimestamp
+//    @CreationTimestamp
+    @Setter
     private LocalDateTime createdAt;
 
     @Setter
@@ -42,6 +43,7 @@ public class Pomo {
     public static Pomo create(User user){
         return Pomo.builder()
                 .user(user)
+                .createdAt(LocalDateTime.now())
                 .build();
     }
 }
