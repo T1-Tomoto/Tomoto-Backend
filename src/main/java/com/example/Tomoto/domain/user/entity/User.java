@@ -64,11 +64,19 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Pomo> pomos = new ArrayList<>();
 
+//    @ElementCollection(fetch = FetchType.LAZY)
+//    @Builder.Default
+//    private List<Boolean> challenges = IntStream.range(0, 11)
+//            .mapToObj(i -> false)
+//            .toList();
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
-    private List<Boolean> challenges = IntStream.range(0, 11)
-            .mapToObj(i -> false)
-            .toList();
+    private List<Boolean> challenges = new ArrayList<>(
+            IntStream.range(0, 11)
+                    .mapToObj(i -> false)
+                    .collect(Collectors.toList())
+    );
+
 
 
     public static User create(String id, String password, String nickname) {
@@ -78,6 +86,27 @@ public class User {
                 .nickname(nickname)
                 .createdAt(LocalDateTime.now())
                 .build();
+    }
+
+    // 더미 친구 유저들 생성 메서드
+    public static List<User> createDummyFriends() {
+        List<String> friendNames = List.of("여운", "상희", "승연", "서윤", "시은");
+        List<User> dummyFriends = new ArrayList<>();
+
+        for (String name : friendNames) {
+            User friend = User.builder()
+                    .id("dummy_" + name.toLowerCase())
+                    .password("dummy123") // 더미 비밀번호
+                    .nickname(name)
+                    .createdAt(LocalDateTime.now().minusDays((long)(Math.random() * 30))) // 랜덤한 가입일
+                    .level((int)(Math.random() * 10) + 1) // 1-10 레벨
+                    .xp((int)(Math.random() * 1000)) // 0-999 경험치
+                    .totalPomo((int)(Math.random() * 50) + 10) // 10-59 뽀모도로
+                    .bio(name + "의 한줄소개입니다!")
+                    .build();
+            dummyFriends.add(friend);
+        }
+        return dummyFriends;
     }
 
     public void updateXpAndLevel(int level, int xp) {

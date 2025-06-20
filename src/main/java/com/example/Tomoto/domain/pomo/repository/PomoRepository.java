@@ -14,4 +14,5 @@ public interface PomoRepository extends JpaRepository<Pomo, Long> {
     Optional<Pomo> findByUserAndCreatedAtBetween(User user, LocalDateTime start, LocalDateTime end);
 
     List<DailyPomoCountDto> findByUserOrderByCreatedAtDesc(User user);
+    List<Pomo> findByUser(User user);
 }
