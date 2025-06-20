@@ -29,12 +29,19 @@ public class Pomo {
     private LocalDateTime createdAt;
 
     @Setter
+    @Builder.Default
     private int pomoNum = 1; //오늘 하루동안 몇 번
+
+    @PrePersist
+    private void setDefaults() {
+        if (this.pomoNum == 0) {
+            this.pomoNum = 1;
+        }
+    }
 
     public static Pomo create(User user){
         return Pomo.builder()
                 .user(user)
-                .createdAt(LocalDateTime.now())
                 .build();
     }
 }

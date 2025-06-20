@@ -47,7 +47,9 @@ public class PomoService {
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         LocalDateTime startOfDay = LocalDateTime.now().toLocalDate().atStartOfDay();  // 오늘 00:00
+        System.out.println("startOfDay: " + startOfDay);
         LocalDateTime endOfDay = startOfDay.plusDays(1);
+        System.out.println("endOfDay: " + endOfDay);
 
         Optional<Pomo> pomo = pomoRepository.findByUserAndCreatedAtBetween(user, startOfDay, endOfDay);
 //        if(pomo.isPresent()){
