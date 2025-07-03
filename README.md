@@ -10,6 +10,8 @@
 - 학습 패턴의 시각화
 - 게임화 요소와 친구 랭킹 시스템을 통해 사용자에게 지속적인 동기부여를 제공
 
+## 🏛️ 시스템 아키텍처
+<img width="600" alt="Image" src="https://github.com/user-attachments/assets/2d2746c8-422a-4769-bacf-57228d4bee51" />
 
 ## 🧩 핵심 기능 
 
@@ -36,6 +38,3 @@
 📄 **Swagger 기반 API 문서 제공**
   - `/swagger-ui/index.html` 경로에서 확인 가능
 
-
-## 🏛️ 시스템 아키텍처
-<img width="600" alt="Image" src="https://github.com/user-attachments/assets/2d2746c8-422a-4769-bacf-57228d4bee51" />
